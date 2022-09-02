@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import 'package:flutter_uix/flutter_uix.dart';
 import '../../utils/extensions.dart';
+import '../../widgets/menu/menu.dart';
 import '../../widgets/sidebar/sidebar.dart';
 
 class HomeView extends ConsumerWidget {
@@ -24,23 +25,19 @@ class HomeView extends ConsumerWidget {
               ),
               hoverColor: const Color(0xFF384047),
               textStyle: const TextStyle(fontSize: 12, color: Colors.white),
-              selectedTextStyle: const TextStyle(fontSize: 12, color: Color(0xFF0AB4FF)),
+              selectedTextStyle:
+                  const TextStyle(fontSize: 12, color: Color(0xFF0AB4FF)),
               itemTextPadding: const EdgeInsets.only(left: 20),
               selectedItemTextPadding: const EdgeInsets.only(left: 20),
-              itemDecoration: BoxDecoration(
-                border: Border.all(color: canvasColor),
-              ),
+              itemDecoration: const BoxDecoration(
+                  // border: Border.all(color: canvasColor),
+                  ),
               selectedItemDecoration: BoxDecoration(
-                // borderRadius: BorderRadius.circular(10),
-                border: Border(
-                  left: BorderSide(
-                    color: Color(0xFF0AB4FF),
-                    width: 4,                    
-                  )
-                ),
-                // gradient:LinearGradient(
-                //   colors: [accentCanvasColor, canvasColor],
-                // ),
+                border: const Border(
+                    left: BorderSide(
+                  color: Color(0xFF0AB4FF),
+                  width: 3,
+                )),
                 color: const Color(0xFF28404C),
                 boxShadow: [
                   BoxShadow(
@@ -53,18 +50,22 @@ class HomeView extends ConsumerWidget {
                 color: Color(0xFF757C86),
                 size: 20,
               ),
-            ),
-
+            ),            
             extendedTheme: SidebarTheme(
               width: 200,
               decoration: BoxDecoration(
                 color: canvasColor,
               ),
-              margin: EdgeInsets.only(right: 10),
+              margin: const EdgeInsets.only(right: 1),
               selectedIconTheme: const IconThemeData(
                 color: Color(0xFF0AB4FF),
                 size: 20,
               ),
+              itemMargin: const EdgeInsets.only(top: 0),
+              selectedItemMargin: const EdgeInsets.only(top: 0),
+              selectedItemPadding: const EdgeInsets.only(top: 5, bottom: 5, left: 5),
+              padding: const EdgeInsets.only(right: 1),
+              itemPadding: const EdgeInsets.only(top: 5, bottom: 5, left: 5),
             ),
             footerDivider: divider,
             headerBuilder: (context, extended) {
@@ -72,7 +73,7 @@ class HomeView extends ConsumerWidget {
                 height: 100,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Image.asset('assets/images/avatar.png'),
+                  child: Image.asset('assets/memoji/1.png'),
                 ),
               );
             },
@@ -173,10 +174,7 @@ class _ScreensExample extends StatelessWidget {
               style: theme.textTheme.headline5,
             );
           case 2:
-            return Text(
-              'People',
-              style: theme.textTheme.headline5,
-            );
+            return HomeMenu().whFull(context);
           case 3:
             return Text(
               'Favorites',
@@ -200,4 +198,4 @@ const accentCanvasColor = Color(0xFF3E3E61);
 const white = Colors.white;
 final actionColor = const Color(0xFF5F5FA7).withOpacity(0.6);
 
-final divider = Divider(color: white.withOpacity(0.3), height: 1);
+final divider = Divider(color: white.withOpacity(0.3), height: 0);
