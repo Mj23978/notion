@@ -1,8 +1,10 @@
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_uix/flutter_uix.dart';
 import '../../utils/extensions.dart';
 import '../../widgets/menu/menu.dart';
+import '../../widgets/sidebar/expandable_cell.dart';
 import '../../widgets/sidebar/sidebar.dart';
 
 class HomeView extends ConsumerWidget {
@@ -50,7 +52,7 @@ class HomeView extends ConsumerWidget {
                 color: Color(0xFF757C86),
                 size: 20,
               ),
-            ),            
+            ),
             extendedTheme: SidebarTheme(
               width: 200,
               decoration: BoxDecoration(
@@ -63,7 +65,8 @@ class HomeView extends ConsumerWidget {
               ),
               itemMargin: const EdgeInsets.only(top: 0),
               selectedItemMargin: const EdgeInsets.only(top: 0),
-              selectedItemPadding: const EdgeInsets.only(top: 5, bottom: 5, left: 5),
+              selectedItemPadding:
+                  const EdgeInsets.only(top: 5, bottom: 5, left: 5),
               padding: const EdgeInsets.only(right: 1),
               itemPadding: const EdgeInsets.only(top: 5, bottom: 5, left: 5),
             ),
@@ -90,8 +93,9 @@ class HomeView extends ConsumerWidget {
                       debugPrint('Hello');
                     },
                   ),
-              (theme, ac, ex, se) => SidebarCell(
+              (theme, ac, ex, se) => ExpandableCell(
                     animationController: ac,
+                    items: [],
                     theme: theme,
                     icon: Icons.search,
                     extended: ex,
@@ -169,9 +173,19 @@ class _ScreensExample extends StatelessWidget {
               ),
             );
           case 1:
-            return Text(
-              'Search',
-              style: theme.textTheme.headline5,
+            return ExpandableTheme(
+              data: const ExpandableThemeData(
+                iconColor: Colors.blue,
+                useInkWell: true,
+              ),
+              child: ListView(
+                physics: const BouncingScrollPhysics(),
+                children: <Widget>[
+                  Card1(),
+                  Card2(),
+                  Card3(),
+                ],
+              ),
             );
           case 2:
             return HomeMenu().whFull(context);
